@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet"/>
+
+    <title>Calculadora</title>
+
+    <style>
+      :root {
+        --blood-red: #5c0000;
+        --dark-night: #0d0d0d;
+        --goth-purple: #1c0f1a;
+        --bone-white: #f6ebeb;
+      }
+
+      * {
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'UnifrakturCook', cursive;
+        background-color: var(--dark-night);
+        color: var(--bone-white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        min-height: 100vh;
+      }
+
+      .calc {
+        width: 33%;
+        background-color: var(--goth-purple);
+        border: 5px solid var(--blood-red);
+        border-radius: 20px;
+        text-align: center;
+        padding: 20px;
+        position: relative;
+      }
+
+      #ans {
+        width: 90%;
+        height: 50px;
+        margin-top: 10px;
+        font-family: Arial;
+        font-size: 20px;
+        color: var(--dark-night);
+        text-align: center;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+      }
+
+      .btn input[type='button'] {
+        width: 70px;
+        padding: 2px;
+        margin: 4px;
+        height: 55px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.5s ease;
+        background-color: var(--blood-red);
+        border-radius: 6px;
+        border: none;
+        color: var(--bone-white);
+      }
+
+      .btn input[type='button']:hover {
+        background-color: #7a0000;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <div class="container">
+      <nav class="navbar navbar-light" style="background-color: var(--blood-red);">
+        <div class="container">
+          <a class="navbar-brand" href="index.html" style="color: var(--bone-white);">Inicio</a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="nav navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="unidad1.html"
+                  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false" style="color: #fffdf7ff;">UNIDAD 1 Ciberseguridad</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="./mel1.html">Conceptos</a><br>
+                  <a class="dropdown-item" href="./mel2.html">Ataques</a><br>
+                  <a class="dropdown-item" href="./mel3.html">Protección</a>
+                </div>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="unidad1.html"
+                  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false" style="color: #fffdf7ff;">UNIDAD 2</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="./index4.html">Conceptos</a><br>
+                  <a class="dropdown-item" href="./index5.php">Ataques</a><br>
+                  <a class="dropdown-item" href="./index6.php">Protección</a><br>
+                </div>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="unidad1.html"
+                  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false" style="color: white;">UNIDAD 3</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="./index7.php">Conceptos</a><br>
+                  <a class="dropdown-item" href="./index8.php">Ataques</a><br>
+                  <a class="dropdown-item" href="./index9.php">Protección</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- CALCULADORA CENTRADA Y FUNCIONAL -->
+    <div class="calc">
+      <input type="text" id="ans" readonly>
+      <div class="btn">      
+        <input type="button" value='C' onclick="Clear()">
+        <input type="button" value='%' onclick="Solve('%')">
+        <input type="button" value='←' onclick="Back()">
+        <input type="button" value='/' onclick="Solve('/')"><br>
+
+        <input type="button" value='7' onclick="Solve('7')">
+        <input type="button" value='8' onclick="Solve('8')">
+        <input type="button" value='9' onclick="Solve('9')">
+        <input type="button" value='x' onclick="Solve('*')"><br>
+
+        <input type="button" value='4' onclick="Solve('4')">
+        <input type="button" value='5' onclick="Solve('5')">
+        <input type="button" value='6' onclick="Solve('6')">
+        <input type="button" value='-' onclick="Solve('-')"><br>
+
+        <input type="button" value='1' onclick="Solve('1')">
+        <input type="button" value='2' onclick="Solve('2')">
+        <input type="button" value='3' onclick="Solve('3')">
+        <input type="button" value='+' onclick="Solve('+')"><br>
+
+        <input type="button" value='00' onclick="Solve('00')">
+        <input type="button" value='0' onclick="Solve('0')">
+        <input type="button" value='.' onclick="Solve('.')">
+        <input type="button" value='=' onclick="Result()"><br>             
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function Solve(val) {
+        const v = document.getElementById('ans');
+        v.value += val;
+      }
+
+      function Result() {
+        const v1 = document.getElementById('ans').value;
+        if (v1.trim() === '') return;
+        try {
+          const v2 = eval(v1);
+          document.getElementById('ans').value = v2;
+        } catch {
+          document.getElementById('ans').value = 'Error';
+        }
+      }
+
+      function Clear() {
+        document.getElementById('ans').value = '';
+      }
+
+      function Back() {
+        const input = document.getElementById('ans');
+        input.value = input.value.slice(0, -1);
+      }
+    </script>
+  </body>
+</html>
