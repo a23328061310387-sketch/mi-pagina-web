@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvp0+1lw4y57PTFmhCaXp0ML5d60M1M7uH2+nqU1vzIebhnd0JK28anv1" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+    <title>Remy Lebeau</title>
+    <style>
+        :root {
+            --blood-red: #6a3a3a;
+            --dark-night: #0d0d0d;
+            --shadow-gray: #1a1a1a;
+            --bone-white: #f5f5f5;
+        }
+
+        body {
+            background-color: var(--dark-night);
+            color: var(--bone-white);
+            font-family: 'Verdana', Geneva, Tahoma, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'UnifrakturCook', cursive;
+            color: var(--blood-red);
+            text-align: center;
+            font-size: 48px;
+            text-shadow: 2px 2px 5px #000;
+            margin-bottom: 30px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 900px;
+            background-color: var(--shadow-gray);
+            border: 2px solid var(--blood-red);
+            box-shadow: 0 0 20px #000;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+        }
+
+        th {
+            background-color: var(--blood-red);
+            color: var(--bone-white);
+            text-transform: uppercase;
+            font-family: 'UnifrakturCook', cursive;
+            letter-spacing: 2px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #1e1e1e;
+        }
+
+        tr:hover {
+            background-color: var(--blood-red);
+            transition: 0.3s;
+        }
+
+        img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 6px double var(--blood-red);
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 0 15px #000;
+        }
+
+        hr {
+            border: 1px solid var(--blood-red);
+            margin: 40px auto;
+            width: 80%;
+        }
+
+        p {
+            margin: 5px 0;
+            color: var(--bone-white);
+        }
+
+        b {
+            color: var(--blood-red);
+        }
+
+        i {
+            color: var(--blood-red);
+            margin-right: 5px;
+        }
+
+        .section-title {
+            font-family: 'UnifrakturCook', cursive;
+            font-size: 24px;
+            color: var(--blood-red);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Remy Lebeau</h1>
+
+    <table>
+        <tr>
+            <td>
+                <img src="perfil.jpg" alt="Gambit">
+            </td>
+            <td>
+                <p>Género: <b>Femenino</b></p>
+                <p>Raza: <b>Humano</b></p>
+                <p>Nacimiento: <b>Mayo 2005</b></p>
+                <p>Calle: <b>Santa Lucía</b></p>
+                <p>Ciudad: <b>Reynosa</b></p>
+                <p>Teléfono: <b>8991054335</b></p>
+                <p>Celular: <b>8991054335</b></p>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">Gambit de los X-Men</th>
+        </tr>
+    </table>
+
+    <hr>
+
+    <table>
+        <tr>
+            <th colspan="2"><i class="fa fa-user"></i> Información Básica</th>
+        </tr>
+        <tr>
+            <td>
+                <p>E-Mail:</p>
+                <p>Altura:</p>
+                <p>Peso:</p>
+                <p>Color de Pelo:</p>
+                <p>Tipo de Sangre:</p>
+                <p>Apellido Materno:</p>
+                <p>Estado Civil:</p>
+                <p>Signo Zodiacal:</p>
+                <p>Educación:</p>
+                <p>Historial de Enfermedades:</p>
+            </td>
+            <td>
+                <p><b>m4rc0cruz1340@gmail.com</b></p>
+                <p><b>1.54 mts</b></p>
+                <p><b>47 kg</b></p>
+                <p><b>Negro</b></p>
+                <p><b>O+</b></p>
+                <p><b>Marciano</b></p>
+                <p><b>Soltera</b></p>
+                <p><b>Tauro</b></p>
+                <p><b>Preparatoria</b></p>
+                <p><b>Ninguna</b></p>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th colspan="2"><i class="fa fa-briefcase"></i> Información de Empleo</th>
+        </tr>
+        <tr>
+            <td>
+                <p>Estado del Empleo:</p>
+                <p>Salario Mensual:</p>
+                <p>Ocupación:</p>
+                <p>Nombre de la Empresa:</p>
+                <p>Tamaño de la Empresa:</p>
+                <p>Industria:</p>
+            </td>
+            <td>
+                <p><b>Ninguna</b></p>
+                <p><b>Ninguna</b></p>
+                <p><b>Nada</b></p>
+                <p><b>Ninguna</b></p>
+                <p><b>No sé</b></p>
+                <p><b>Ninguna</b></p>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
