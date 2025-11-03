@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enciclopedia de Animales Marinos 🐋</title>
+  <style>
+    body {
+      font-family: 'Trebuchet MS', sans-serif;
+      background: linear-gradient(to bottom, #003366, #0099cc);
+      color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .search-container {
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      width: 250px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #00aaff;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0077aa;
+    }
+
+    .animal-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .animal-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      width: 300px;
+      padding: 15px;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .animal-card:hover {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .animal-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .animal-card h3 {
+      color: #ffdd57;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .error-message {
+      color: #ff4d4d;
+      font-weight: bold;
+      margin: 20px;
+      padding: 10px;
+      border: 2px solid #ff4d4d;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    footer {
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    footer h4 {
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+    #btnVolverIndex {
+  background-color: #ff7043;
+  margin-left: 10px;
+}
+
+#btnVolverIndex:hover {
+  background-color: #e85c2d;
+}
+
+  </style>
+</head>
+
+<body>
+  <header>Enciclopedia de Animales Marinos</header>
+
+  <div class="search-container">
+  <input type="text" id="searchInput" placeholder="Busca un animal marino (ej. delfín, tiburón, ballena)">
+  <button onclick="buscarAnimal()">Buscar</button>
+  <button id="btnInicio" onclick="regresarInicio()" style="display:none;">Volver</button>
+  <button id="btnVolverIndex" onclick="window.location.href='index.html'">Regresar al menú</button>
+</div>
+
+
+  <div id="errorMessage" class="error-message" style="display:none;"></div>
+  <section id="animalList" class="animal-container"></section>
+
+  <footer>
+    <h4>Integrantes del equipo:</h4>
+     <ul>
+      <li>1. Vanessa Elena Cerecedo Gonzales</li>
+      <li>2. Melanie De la cruz Marciano</li>
+      <li>3. Nohemi Ramirez Castro</li>
+      <li>4. Fatima Sallely Fernandez Garcia</li>
+      <li>5. Maria Fernanda De la rosa Rodriguez</li>
+    </ul>
+  </footer>
+
+  <script>
+  const animalList = document.getElementById("animalList");
+  const errorMessage = document.getElementById("errorMessage");
+
+  const animalesMarinosPermitidos = [
+    // Mamíferos marinos
+    "delfín", "tiburón", "ballena", "ballena azul", "ballena jorobada", "ballena gris",
+    "ballena piloto", "orca", "narval", "beluga", "foca", "león marino", "morsa",
+    "dugong", "manatí", "marsopa", "tiburón blanco", "tiburón martillo", "tiburón tigre",
+    "tiburón ballena",
+
+    // Peces
+    "pez payaso", "pez globo", "pez ángel", "pez cirujano", "pez león", "pez loro",
+    "pez cofre", "pez espada", "pez aguja", "pez sierra", "pez luna", "pez mandarín",
+    "pez mariposa", "mero", "atún", "salmón", "caballa", "sardina", "anchoa", "boquerón",
+    "besugo", "lubina", "pargo", "pez raya", "mantarraya", "rayas eléctricas",
+    "anguila", "morena", "mero gigante", "corvina", "pez volador", "pez linterna",
+    "pez abisal", "bacalao", "gobio", "pez halcón", "pez escorpión", "pez cardenal",
+
+    // Invertebrados
+    "pulpo", "calamar", "sepia", "nautilo", "caracol marino", "ostra", "mejillón",
+    "almeja", "berberecho", "vieira", "navaja", "camarón", "langosta", "bogavante",
+    "cangrejo", "cangrejo ermitaño", "cangrejo real", "cangrejo azul", "gamba",
+    "kril", "isópodo gigante", "anfípodo", "langostino", "percebe",
+    "medusa", "anémona de mar", "coral", "coral cerebro", "coral cuerno de ciervo",
+    "hidra", "esponja de mar", "gusano marino", "gusano de fuego", "gusano tubo",
+    "pepino de mar", "erizo de mar", "estrella de mar", "dólar de arena", "lirios de mar",
+
+    // Reptiles marinos
+    "tortuga marina", "tortuga carey", "tortuga boba", "tortuga verde",
+    "tortuga laúd", "iguana marina", "serpiente marina", "cocodrilo marino",
+
+    // Aves marinas
+    "pingüino", "albatros", "gaviota", "pelícano", "pardela", "charrán", "piquero", 
+    "cormorán", "fragata", "pato marino",
+
+    // Otros
+    "plancton", "fitoplancton", "zooplancton", "lapa", "limpiafondos", "holoturia",
+    "sifonóforo", "león marino de California", "foca monje", "foca leopardo",
+    "carabela portuguesa", "anélido marino", "esponja barril", "babosa de mar",
+    "nudibranquio", "concha marina", "pepino abisal", "caracol cono", "gusano plumero",
+    "tiburón zorro", "tiburón nodriza", "tiburón de Groenlandia", "tiburón mako",
+    "tiburón limón", "tiburón toro", "tiburón sarda", "tiburón azul",
+    "pez piedra", "pez dragón", "pez tamboril", "pez abisal negro", "pez abisal viperino",
+    "cangrejo araña gigante", "cangrejo de los cocoteros", "langosta espinosa",
+    "camarón mantis", "isópodo marino", "estrella quebradiza", "pepino abisal gigante",
+    "pez limpiador", "pez piloto", "pez gato marino", "pez roca", "pez arenque",
+    "pez reloj anaranjado", "pez cofre pintado", "pez mariposa listado",
+    "pez globo dorado", "pez gobio de arrecife", "pez cardenal banggai",
+    "pez payaso tomate", "pez payaso percula", "pez payaso clarkii",
+    "pez napoleón", "pez unicornio", "pez ángel emperador", "pez ángel reina",
+    "pez cirujano azul", "pez cirujano amarillo", "pez cirujano púrpura",
+    "pez cirujano negro", "pez cirujano blanco",
+    "langosta azul", "cangrejo violinista", "cangrejo de herradura",
+    "estrella corona de espinas", "estrella de mar azul",
+    "medusa luna", "medusa melena de león", "medusa caja", "medusa inmortal",
+    "anémona gigante", "anémona verde", "coral blando", "coral duro", "coral rojo",
+    "coral negro", "coral azul",
+    "gusano abanico", "gusano espagueti", "gusano de crin", "gusano de tubo gigante",
+    "foca gris", "foca común", "león marino antártico", "orca pigmea",
+    "delfín nariz de botella", "delfín rosado del Amazonas", "delfín manchado",
+    "delfín común", "marsopa común", "narval ártico", "beluga blanca",
+    "dugong del Indo-Pacífico", "manatí del Caribe"
+  ];
+
+  const animalesIniciales = ["Delfín", "Tiburón", "Ballena Azul", "Pulpo", "Foca"];
+
+  function normalizarTexto(texto) {
+    return texto
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+  }
+
+  function esAnimalMarinoPermitido(query) {
+    const queryNormalizada = normalizarTexto(query);
+
+    for (const animal of animalesMarinosPermitidos) {
+      const animalNormalizado = normalizarTexto(animal);
+      if (animalNormalizado === queryNormalizada) {
+        return animal;
+      }
+      if (animalNormalizado.includes(queryNormalizada) && queryNormalizada.length > 2) {
+        return animal;
+      }
+    }
+    return null;
+  }
+
+  async function obtenerAnimal(nombre) {
+    errorMessage.style.display = "none";
+
+    try {
+      const res = await fetch(
+        `https://es.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(nombre)}`
+      );
+      const data = await res.json();
+
+      if (data.type === "standard" || data.type === "article") {
+        const card = document.createElement("div");
+        card.classList.add("animal-card");
+        card.innerHTML = `
+          <img src="${
+            data.thumbnail
+              ? data.thumbnail.source
+              : "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+          }" alt="${nombre}">
+          <h3>${data.title}</h3>
+          <p>${data.extract}</p>
+          <a href="${data.content_urls.desktop.page}" target="_blank" style="color:#ffd700;">Ver más en Wikipedia</a>
+        `;
+        animalList.appendChild(card);
+      } else {
+        mostrarError(`No se encontró un artículo detallado para <b>${nombre}</b>. Intenta con otro término.`);
+      }
+    } catch (error) {
+      console.error("Error al obtener información:", error);
+      mostrarError("Ocurrió un error de red o de la API de Wikipedia. Inténtalo de nuevo.");
+    }
+  }
+
+  function mostrarError(mensaje) {
+    errorMessage.innerHTML = mensaje;
+    errorMessage.style.display = "inline-block";
+  }
+
+  async function mostrarAnimalesIniciales() {
+    animalList.innerHTML = "";
+    for (const nombre of animalesIniciales) {
+      const nombreBusqueda = esAnimalMarinoPermitido(nombre);
+      if (nombreBusqueda) {
+        await obtenerAnimal(nombreBusqueda);
+      }
+    }
+  }
+
+  async function buscarAnimal() {
+  const query = document.getElementById("searchInput").value.trim();
+
+  if (!query) {
+    mostrarError("Por favor, escribe el nombre de un animal marino.");
+    return;
+  }
+
+  const animalValido = esAnimalMarinoPermitido(query);
+  animalList.innerHTML = "";
+
+  if (animalValido) {
+    await obtenerAnimal(animalValido);
+  } else {
+    mostrarError(`"${query}" no es un animal marino permitido. Intenta con delfín, tiburón o pulpo.`);
+  }
+
+  
+  document.getElementById("btnInicio").style.display = "inline-block";
+}
+function regresarInicio() {
+  document.getElementById("searchInput").value = "";
+  errorMessage.style.display = "none";
+  mostrarAnimalesIniciales();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  document.getElementById("btnInicio").style.display = "none";
+}
+
+
+  mostrarAnimalesIniciales();
+</script>
+
+</body>
+</html>
+ 
